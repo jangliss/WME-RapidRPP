@@ -104,7 +104,7 @@ var UpdateObject, MultiAction;
             var nextElem = $('input.rapidRPP-next');
             var nextVal = nextElem.val();
             var newHN = Number(nextVal) + 1;
-            nextElem.val(nextHN).change();
+            nextElem.val(newHN).change();
             createRPP(pos, newHN);
         }
     }
@@ -115,7 +115,7 @@ var UpdateObject, MultiAction;
             var nextElem = $('input.rapidRPP-next');
             var nextVal = nextElem.val();
             var newHN = Number(nextVal) + 2;
-            nextElem.val(nextHN).change();
+            nextElem.val(newHN).change();
             createRPP(pos, newHN);
         }
     }
@@ -126,7 +126,7 @@ var UpdateObject, MultiAction;
             var nextElem = $('input.rapidRPP-next');
             var nextVal = nextElem.val();
             var newHN = Number(nextVal) + 4;
-            nextElem.val(nextHN).change();
+            nextElem.val(newHN).change();
             createRPP(pos, newHN);
         }
     }
@@ -186,7 +186,7 @@ var UpdateObject, MultiAction;
         UpdateObject = require("Waze/Action/UpdateObject");
         MultiAction = require("Waze/Action/MultiAction");
         new WazeWrap.Interface.Shortcut('CreateRapidRPPs', 'Creates multiple resdiential Place points', 'wmerrpp', 'Rapid RPP', "A+k", function(){doRapidRPP();}, null).add();
-        new WazeWrap.Interface.Shortcut('CreateRapidRPPsplus1', 'Creates multiple resdiential Place points', 'wmerrpp', 'Rapid RPP', "h", function(){doRapidRPPplusNext();}, null).add();
+        new WazeWrap.Interface.Shortcut('CreateRapidRPPsplusNext', 'Creates multiple resdiential Place points', 'wmerrpp', 'Rapid RPP', "h", function(){doRapidRPPplusNext();}, null).add();
         new WazeWrap.Interface.Shortcut('CreateRapidRPPsplus1', 'Creates multiple resdiential Place points', 'wmerrpp', 'Rapid RPP', "v", function(){doRapidRPPplus1();}, null).add();
         new WazeWrap.Interface.Shortcut('CreateRapidRPPsplus2', 'Creates multiple resdiential Place points', 'wmerrpp', 'Rapid RPP', "b", function(){doRapidRPPplus2();}, null).add();
         new WazeWrap.Interface.Shortcut('CreateRapidRPPsplus4', 'Creates multiple resdiential Place points', 'wmerrpp', 'Rapid RPP', "n", function(){doRapidRPPplus4();}, null).add();
