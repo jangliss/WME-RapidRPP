@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         WME RapidRPP
-// @version      2021.05.20.01
+// @version      2021.05.30.01
 // @description  Rapid Residential Place Point Creator
 // @include      https://www.waze.com/editor*
 // @include      https://www.waze.com/*/editor*
@@ -170,15 +170,17 @@ var UpdateObject, MultiAction;
     }
 
     function addRapidRPPMenu() {
-        let toolBar;
-        let RapidRPPBox;
+        if (W.editingMediator.attributes.editingEnabled) {
+            let toolBar;
+            let RapidRPPBox;
+    
+            RapidRPPBox = $('<div class="toolbar-button rapidRPP-control" style="float:left; padding-right: 3px; padding-left: 5px;"><span class="menu-title">Next #</span>' +
+                '<input type="number" class="rapidRPP-next" style="margin: 3px; height:20px; width: 64px; text-align: right">' +
+                '<span id="rapidRPP-input-type" style="font-size: 10px;">#</span><span id="rapidRPP-input-is-number" style="display:none">1,2,3</span><span id="rapidRPP-input-is-text" style="display:none">123,456ABC,789-321</span></div>' +
+                '<div class="toolbar-button rapidRPP-control" style="float:left"><span class="menu-title" style="text-align: right">Increment</span><input type="number" name="incrementRPP" id="rapidRPP-increment" value="4" style="margin: 3px; height:20px; width: 45px; text-align: right" step="1"></div>');
 
-        RapidRPPBox = $('<div class="toolbar-button rapidRPP-control" style="float:left; padding-right: 3px; padding-left: 5px;"><span class="menu-title">Next #</span>' +
-            '<input type="number" class="rapidRPP-next" style="margin: 3px; height:20px; width: 64px; text-align: right">' +
-            '<span id="rapidRPP-input-type" style="font-size: 10px;">#</span><span id="rapidRPP-input-is-number" style="display:none">1,2,3</span><span id="rapidRPP-input-is-text" style="display:none">123,456ABC,789-321</span></div>' +
-            '<div class="toolbar-button rapidRPP-control" style="float:left"><span class="menu-title" style="text-align: right">Increment</span><input type="number" name="incrementRPP" id="rapidRPP-increment" value="4" style="margin: 3px; height:20px; width: 45px; text-align: right" step="1"></div>');
-
-        RapidRPPBox.appendTo($('[id="primary-toolbar"]')[0].children[0]);
+            RapidRPPBox.appendTo($('[id="primary-toolbar"]')[0].children[0]);
+        }
 
     }
 
@@ -186,10 +188,13 @@ var UpdateObject, MultiAction;
         UpdateObject = require("Waze/Action/UpdateObject");
         MultiAction = require("Waze/Action/MultiAction");
         new WazeWrap.Interface.Shortcut('CreateRapidRPPs', 'Creates multiple resdiential Place points', 'wmerrpp', 'Rapid RPP', "A+k", function(){doRapidRPP();}, null).add();
-        new WazeWrap.Interface.Shortcut('CreateRapidRPPsplusNext', 'Creates multiple resdiential Place points', 'wmerrpp', 'Rapid RPP', "h", function(){doRapidRPPplusNext();}, null).add();
+        new WazeWrap.Interface.Shortcut('CreateRapidRPPsplusNext', 'Creates multiple resdiential Place points', 'wmerrpp', 'Rapid RPP', "g", function(){doRapidRPPplusNext();}, null).add();
         new WazeWrap.Interface.Shortcut('CreateRapidRPPsplus1', 'Creates multiple resdiential Place points', 'wmerrpp', 'Rapid RPP', "v", function(){doRapidRPPplus1();}, null).add();
         new WazeWrap.Interface.Shortcut('CreateRapidRPPsplus2', 'Creates multiple resdiential Place points', 'wmerrpp', 'Rapid RPP', "b", function(){doRapidRPPplus2();}, null).add();
         new WazeWrap.Interface.Shortcut('CreateRapidRPPsplus4', 'Creates multiple resdiential Place points', 'wmerrpp', 'Rapid RPP', "n", function(){doRapidRPPplus4();}, null).add();
+
+        W.editingMediator.on('change:editingHouseNumbers', addRapidRPPMenu);
+
         addRapidRPPMenu();
     }
 
